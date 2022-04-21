@@ -14,9 +14,11 @@ import styles from "../../assets/jss/supplier-material/components/headerStyle";
 
 const Header = () => {
     const classes = useClasses(styles);
-    const [open, setOpen] = useState(false);
+    const [input, setInput] = useState("");
     const handleOpen = () => setOpen(true);
-
+    const handleChange = (value) => {
+        setInput(value);
+    }
 
     return (
         <header className={classes.container}>
@@ -58,7 +60,7 @@ const Header = () => {
 
                 <div className={classes.notificationContainer}>
                     <a className={classes.smallTitle}>
-                        This asset review was created by Brian Kackley.
+                        This asset review was created by <strong>Brian Kackley</strong>.
                         Please select Retire Review to begin a new asset review for this store
                     </a>
                 </div>
@@ -66,11 +68,13 @@ const Header = () => {
                 <div className={classes.searchBarContainer}>
                     <FormControl fullWidth variant="filled">
                         <TextField
+                            hiddenLabel
                             className={classes.textField}
                             placeholder="Search For An Asset"
                             variant="filled"
                             color="success"
-                            hiddenLabel
+                            value={input}
+                            onChange={(e)=>handleChange(e.target.value)}
                             InputProps={{
                                 endAdornment:
                                     <InputAdornment position="end">
